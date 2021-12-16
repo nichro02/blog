@@ -9,4 +9,8 @@ module.exports = function(app) {
         );
         next();
     })
+
+    //Get all posts
+    app.get('/api/posts/all', controller.getAllBlogPosts)
 }
+
