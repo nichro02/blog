@@ -56,4 +56,12 @@ exports.addNewPost = async (req, res) => {
       }
       res.send("Post created successfully")
   })
+
+  //get single post
+
+  //update single post
+
+  //delete single post
+
+  //upvote single post
 }
