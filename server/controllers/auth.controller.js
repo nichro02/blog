@@ -7,7 +7,7 @@ const User = db.user
 //Encode and decode the jwt
 const jwt = require('jsonwebtoken')
 //hash password
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcrypt')
 
 //register new user
 exports.signup = (req, res) => {
@@ -25,6 +25,7 @@ exports.signup = (req, res) => {
             return
         } else {
             res.send({message: 'User successfully created'})
+            console.log(user)
         }
     })
 }

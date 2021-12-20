@@ -46,6 +46,7 @@ app.get('/', (req, res)=> {
 
 //routes
 require('./routes/blogPosts.routes')(app)
+require('./routes/auth.routes')(app)
 
 
 //set prot, listen for request
