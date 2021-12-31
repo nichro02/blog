@@ -14,5 +14,9 @@ module.exports = function(app){
     app.get("/api/test/user", [authJwt.verifyWebToken], controller.userBoard)
     //display user profile
     app.get('/api/user/profile/:id', controller.displayUserProfile)
+    //follow user
+    app.put('/api/user/follow', controller.follow)
+    //unfollow user
+    app.put('/api/user/unfollow', controller.unfollow)
 
 }
