@@ -9,7 +9,7 @@ const BlogPost = db.blogPost
 exports.getAllBlogPosts = async (req, res) => {
     try {
         const posts = await BlogPost.find()
-        restart.status(200).json(posts)
+        res.status(200).json(posts)
     } catch (error) {
         res.status(404).json({message: error.message})
     }
@@ -28,14 +28,14 @@ exports.addNewPost = async (req, res) => {
   })
 
   //Reference the user as the author of the new post
-    post.author.push(req.body.author)
+    createPost.author.push(req.body.author)
 
     //Find the user and add user as author to the post
     User.findById(req.body.author, (err, user) => {
     if (err) {
         console.log(err)
     }
-    user.posts.push(post._id)
+    user.posts.push(createPost._id)
     user.save()
     })
 

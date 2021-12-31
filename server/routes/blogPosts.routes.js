@@ -14,7 +14,7 @@ module.exports = function(app) {
     app.get('/api/post/all', controller.getAllBlogPosts)
 
     //Post a new entry
-    app.post('/api/post/', controller.addNewPost)
+    app.post('/api/post/new', controller.addNewPost)
 
     //Get single post
     app.get('/api/post/:idx', controller.getOnePost)
