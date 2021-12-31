@@ -7,8 +7,9 @@ const User = db.user
 //verify web token
 verifyWebToken = (req, res, next) => {
     //declare token which is passed in through headers
-    let token = req.headers['x-axcess-token']
-
+    
+    let token = req.headers['x-access-token']
+    //console.log(token)
     //error out if no token
     if(!token){
         return res.status(403).send({message:'There is an error with the token'})

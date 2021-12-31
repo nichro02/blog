@@ -1,14 +1,15 @@
-const { authJwt } = require('../middlewares')
+const authJwt  = require('../middlewares/auth.middleware')
 const controller = require('../controllers/user.controller')
 
 module.exports = function(app){
     app.use((req, res, next) => {
         res.header(
             'Access-Control-Allow-Headers',
-            'x-axcess-token, Origin, Content-type, Accept'
+            'x-access-token, Origin, Content-type, Accept'
         )
+        next()
     })
-    next()
+    
 
     app.get("/api/test/user", [authJwt.verifyWebToken], controller.userBoard)
     //display user profile
