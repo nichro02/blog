@@ -58,7 +58,7 @@ exports.addNewPost = async (req, res) => {
   })
 
   
-  }
+}
   //get single post
   exports.getOnePost = (req, res) => {
     const id = req.params.idx
@@ -78,10 +78,23 @@ exports.addNewPost = async (req, res) => {
             res.send(post)
         }
     })
-
-  //update single post
-
-  //delete single post
-
-  //upvote single post
+  
 }
+//update single post
+exports.updateOnePost = (req, res) => {
+    const id = req.body.id
+    BlogPost.updateOne({_id: id}, {
+        body: req.body.body
+    })
+    .then(data => {
+        if(!data){
+            return res.status(400).send({message: 'There was a problem updating the post'})
+        } else {
+            res.send(data)
+        }
+    })
+}
+
+//delete single post
+
+//upvote single post
