@@ -57,7 +57,27 @@ exports.addNewPost = async (req, res) => {
       res.send("Post created successfully")
   })
 
+  
+  }
   //get single post
+  exports.getOnePost = (req, res) => {
+    const id = req.params.idx
+    BlogPost.find({_id: id})
+    .populate({
+        path: 'replies',
+        model: 'BlogPost'
+    })
+    .populate({
+        path: 'author',
+        model: 'User'
+    })
+    .then(post => {
+        if(!post){
+            return res.status(400).send({message: 'Error retrieving post'})
+        } else {
+            res.send(post)
+        }
+    })
 
   //update single post
 
