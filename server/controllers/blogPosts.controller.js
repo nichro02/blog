@@ -117,7 +117,23 @@ exports.upvote = (req, res) => {
                 return
             } else {
                 res.send({message: 'Upvote processed'})
-                console.log(res)
+                //console.log(res)
+                return
+            }
+
+        })
+}
+
+//downvote a single vote
+exports.downvote = (req, res) => {
+    BlogPost.findByIdAndUpdate(req.body.id, {$inc:{downvote: 1}},
+        (error, post) => {
+            if(error){
+                res.status(500).send({message: err})
+                return
+            } else {
+                res.send({message: 'Downvote processed'})
+                //console.log(res)
                 return
             }
 

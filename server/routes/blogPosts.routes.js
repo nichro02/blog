@@ -22,6 +22,9 @@ module.exports = function(app) {
     //Increment upvote for a single post
     app.put('/api/post/upvote', controller.upvote)
 
+    //Increment downvote for a single post
+    app.put('/api/post/downvote', controller.downvote)
+
     //Delete a single post
     app.delete('/api/post/delete', controller.deletePost)
 
