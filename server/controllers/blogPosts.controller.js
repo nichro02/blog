@@ -98,7 +98,7 @@ exports.updateOnePost = (req, res) => {
 //delete single post
 exports.deletePost = (req, res) => {
     const id = req.body.id
-    Post.deleteOne({_id: id})
+    BlogPost.deleteOne({_id: id})
     .then(data => {
         if(!data){
             return res.status(400).send({message: 'There was an issue deleting this post'})
@@ -109,3 +109,17 @@ exports.deletePost = (req, res) => {
 }
 
 //upvote single post
+exports.upvote = (req, res) => {
+    BlogPost.findByIdAndUpdate(req.body.id, {$inc:{upvote: 1}},
+        (error, post) => {
+            if(error){
+                res.status(500).send({message: err})
+                return
+            } else {
+                res.send({message: 'Upvote processed'})
+                console.log(res)
+                return
+            }
+
+        })
+}

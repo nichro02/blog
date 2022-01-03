@@ -19,6 +19,12 @@ module.exports = function(app) {
     //Edit an existing post
     app.put('/api/post/edit', controller.updateOnePost)
 
+    //Increment upvote for a single post
+    app.put('/api/post/upvote', controller.upvote)
+
+    //Delete a single post
+    app.delete('/api/post/delete', controller.deletePost)
+
     //Get single post
     app.get('/api/post/:idx', controller.getOnePost)
 }
