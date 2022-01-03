@@ -96,5 +96,16 @@ exports.updateOnePost = (req, res) => {
 }
 
 //delete single post
+exports.deletePost = (req, res) => {
+    const id = req.body.id
+    Post.deleteOne({_id: id})
+    .then(data => {
+        if(!data){
+            return res.status(400).send({message: 'There was an issue deleting this post'})
+        } else {
+            res.send(data)
+        }
+    })
+}
 
 //upvote single post
