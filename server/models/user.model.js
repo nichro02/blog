@@ -14,6 +14,14 @@ const User = mongoose.model(
         favoritePosts: [{type: mongoose.Schema.Types.ObjectId, ref: 'Post'}],
         reposts: [{type: mongoose.Schema.Types.ObjectId, ref: 'Post'}],
         posts: [{type: mongoose.Schema.Types.ObjectId, ref: 'Post'}],
+        upvote: {
+            type: Number,
+            default: 0,
+        },
+        downvote: {
+            type: Number,
+            default: 0,
+        },
         location: String,
         locationId: String,
         birthday: Date,

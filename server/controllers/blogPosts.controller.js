@@ -110,18 +110,35 @@ exports.deletePost = (req, res) => {
 
 //upvote single post
 exports.upvote = (req, res) => {
+    //add upvote to corresponding post
     BlogPost.findByIdAndUpdate(req.body.id, {$inc:{upvote: 1}},
         (error, post) => {
             if(error){
                 res.status(500).send({message: err})
                 return
             } else {
-                res.send({message: 'Upvote processed'})
-                //console.log(res)
-                return
+                //res.send({message: 'Upvote processed'})
+                console.log('Upvote count on post processed')
+                //return
             }
 
-        })
+        }
+    )
+    //add upvote to author's user record
+    User.findByIdAndUpdate(req.body.authorId, {$inc: {upvote: 1}},
+        (error, post) => {
+            if(error){
+                res.status(500).send({message: err})
+                return
+            } else {
+                res.send({message: 'Upvote processed'})
+                console.log('Upvote count on user updated')
+                //return
+            }
+
+        }
+    )
+
 }
 
 //downvote a single vote
@@ -137,5 +154,6 @@ exports.downvote = (req, res) => {
                 return
             }
 
-        })
+        }
+    )
 }
