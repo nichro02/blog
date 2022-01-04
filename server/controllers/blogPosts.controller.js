@@ -126,7 +126,7 @@ exports.upvote = (req, res) => {
     )
     //add upvote to author's user record
     User.findByIdAndUpdate(req.body.authorId, {$inc: {upvote: 1}},
-        (error, post) => {
+        (error, author) => {
             if(error){
                 res.status(500).send({message: err})
                 return
@@ -135,23 +135,34 @@ exports.upvote = (req, res) => {
                 console.log('Upvote count on user updated')
                 //return
             }
-
         }
     )
-
 }
 
 //downvote a single vote
 exports.downvote = (req, res) => {
+    //increment downvote on post
     BlogPost.findByIdAndUpdate(req.body.id, {$inc:{downvote: 1}},
         (error, post) => {
             if(error){
                 res.status(500).send({message: err})
                 return
             } else {
-                res.send({message: 'Downvote processed'})
-                //console.log(res)
+                //res.send({message: 'Downvote processed'})
+                console.log('Downvote count on post processed')
+                //return
+            }
+        }
+    )
+    //increment downvote on user record
+    User.findByIdAndUpdate(req.body.authorId, {$inc: {downvote: 1}},
+        (error, author) => {
+            if(error){
+                res.status(500).send({message: err})
                 return
+            } else {
+                res.send({message: 'Downvote processed'})
+                console.log('Downvote count on user updated')
             }
 
         }
