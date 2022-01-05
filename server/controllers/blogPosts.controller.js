@@ -168,3 +168,18 @@ exports.downvote = (req, res) => {
         }
     )
 }
+
+//save post to favorites
+exports.favoritePost = (req, res) => {
+    //find user and push id of favorited post into their favoritePosts array
+    User.findByIdAndUpdate(req.body.userId,{$push: {favoritePosts: req.body.id}},
+        (error, post) => {
+            if(error){
+                res.status(500).send({message: 'There was an error favoriting this post'})
+                return
+            } else {
+                res.send('Post saved as favorite')
+            }
+        }
+    )
+}

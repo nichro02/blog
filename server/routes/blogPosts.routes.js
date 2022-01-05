@@ -25,6 +25,9 @@ module.exports = function(app) {
     //Increment downvote for a single post
     app.put('/api/post/downvote', controller.downvote)
 
+    //Favorite a post
+    app.put('/api/post/favorite', controller.favoritePost)
+
     //Delete a single post
     app.delete('/api/post/delete', controller.deletePost)
 
