@@ -183,3 +183,17 @@ exports.favoritePost = (req, res) => {
         }
     )
 }
+
+//remove post from user's favorites arrary
+exports.unfavorite = (req, res) => {
+    User.findByIdAndUpdate(req.body.userId, {$pull: {favoritePosts: req.body.id}},
+        (error, post) => {
+            if(error){
+                res.status(500).send({message: error})
+                return
+            } else {
+                res.send('Post removed from favorites')
+            }
+        }
+    )
+}

@@ -28,6 +28,9 @@ module.exports = function(app) {
     //Favorite a post
     app.put('/api/post/favorite', controller.favoritePost)
 
+    //Un-favorite a post
+    app.put('/api/post/unfavorite', controller.unfavorite)
+
     //Delete a single post
     app.delete('/api/post/delete', controller.deletePost)
 
