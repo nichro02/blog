@@ -199,7 +199,45 @@ exports.unfavorite = (req, res) => {
 }
 
 //re-post an existing post
-exports.rePost = (req, res) => {
+exports.rePost = async (req, res) => {
     //create a post record and pull in info about originating post
+    const { title, body, tags, originalAuthor, originalPost } = req.body
+
+    //set up new record
+    const rePost = new BlogPost({
+        title,
+        body,
+        tags,
+    })
+    rePost.author = req.body.userId
+    rePost.isRepost = true
     
+    //save re-post to user's array of posts
+    User.findById(req.body.userId, (error, user) =>{
+        //add new post id to posts array
+        if(error) {
+            res.status(500).send({message: 'There was an errror re-posting the post'})
+            return
+        } else {
+            user.posts.push(rePost._id)
+        }
+        //save the repost
+        rePost.save((error) => {
+            if(error) {
+                res.status(500).send({message: 'There was an errror saving the post'})
+                return
+            } else {
+                console.log('Repost successfully saved')
+            }
+        })
+        //save updated user to preserve updated array
+        user.save((error) => {
+            if(error) {
+                res.status(500).send({message: 'There was an errror updating the users post array'})
+                return
+            } else {
+                console.log('Post array successfully updated')
+            }
+        })
+    })
 }

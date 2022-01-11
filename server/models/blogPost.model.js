@@ -22,9 +22,15 @@ const Post = mongoose.model(
             default: 0,
         },
         author: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
-        isRepost: Boolean,
-        isReply: Boolean,
-        parentPost: [{type: mongoose.Schema.Types.ObjectId, ref: 'Post'}],
+        isRepost: {
+            type: Boolean,
+            default: false
+        },
+        isReply: {
+            type: Boolean,
+            default: false
+        },
+        originalPost: [{type: mongoose.Schema.Types.ObjectId, ref: 'Post'}],
         originalAuthor: String,
     })
 )
