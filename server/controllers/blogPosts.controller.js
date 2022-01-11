@@ -197,3 +197,9 @@ exports.unfavorite = (req, res) => {
         }
     )
 }
+
+//re-post an existing post
+exports.rePost = (req, res) => {
+    //create a post record and pull in info about originating post
+    
+}

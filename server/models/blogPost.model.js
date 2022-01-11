@@ -17,7 +17,15 @@ const Post = mongoose.model(
             type: Number,
             default: 0,
         },
+        reposts: {
+            type: Number,
+            default: 0,
+        },
         author: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+        isRepost: Boolean,
+        isReply: Boolean,
+        parentPost: [{type: mongoose.Schema.Types.ObjectId, ref: 'Post'}],
+        originalAuthor: String,
     })
 )
 
