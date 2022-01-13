@@ -240,4 +240,16 @@ exports.rePost = async (req, res) => {
             }
         })
     })
+    //update repost count on original post
+    await BlogPost.findByIdAndUpdate(originalPost,{$inc: {reposts: 1}},
+        (error, author) => {
+            if(error){
+                res.status(500).send({message: err})
+                return
+            } else {
+                res.send({message: 'Repost count updated'})
+                console.log('Repost count updated on original post')
+            }
+
+        })
 }

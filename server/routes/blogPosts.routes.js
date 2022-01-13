@@ -34,7 +34,11 @@ module.exports = function(app) {
     //Delete a single post
     app.delete('/api/post/delete', controller.deletePost)
 
+    //Repost a post
+    app.put('/api/post/repost', controller.rePost)
+
     //Get single post
     app.get('/api/post/:idx', controller.getOnePost)
+
 }
 
