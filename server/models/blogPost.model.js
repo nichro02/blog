@@ -30,6 +30,10 @@ const Post = mongoose.model(
             type: Boolean,
             default: false
         },
+        replies: {
+            type: Number,
+            default: 0,
+        },
         originalPost: [{type: mongoose.Schema.Types.ObjectId, ref: 'Post'}],
         originalAuthor: String,
     })

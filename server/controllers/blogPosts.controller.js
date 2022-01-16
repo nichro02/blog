@@ -253,3 +253,47 @@ exports.rePost = async (req, res) => {
 
         })
 }
+
+//reply to a post
+exports.reply = (req, res) => {
+    //set up similar to repost
+    //create a post record and pull in info about originating post
+    const { title, body, tags, originalAuthor, originalPost } = req.body
+
+    //set up new record
+    const reply = new BlogPost({
+        title,
+        body,
+        tags,
+    })
+    reply.author = req.body.userId
+    reply.isReply = true
+    //save re-post to user's array of posts
+    User.findById(req.body.userId, (error, user) =>{
+        //add new post id to posts array
+        if(error) {
+            res.status(500).send({message: 'There was an errror adding the reply'})
+            return
+        } else {
+            user.posts.push(reply._id)
+        }
+        //save the repost
+        reply.save((error) => {
+            if(error) {
+                res.status(500).send({message: 'There was an errror saving the reply'})
+                return
+            } else {
+                console.log('Reply successfully saved')
+            }
+        })
+        //save updated user to preserve updated array
+        user.save((error) => {
+            if(error) {
+                res.status(500).send({message: 'There was an errror updating the users post array'})
+                return
+            } else {
+                console.log('Post array successfully updated')
+            }
+        })
+    })
+}

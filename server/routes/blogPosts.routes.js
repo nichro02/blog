@@ -37,6 +37,9 @@ module.exports = function(app) {
     //Repost a post
     app.put('/api/post/repost', controller.rePost)
 
+    //Reply to a post
+    app.put('/api/post/reply', controller.reply)
+
     //Get single post
     app.get('/api/post/:idx', controller.getOnePost)
 
