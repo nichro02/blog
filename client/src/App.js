@@ -8,12 +8,16 @@ import useStyles from './styles/app.styles'
 import BlogPosts from './components/BlogPosts'
 import BlogPostsForm from './components/BlogPostsForm'
 import Home from './components/Home/Home'
+import Layout from './components/Layout/Layout'
 
 function App() {
   return (
-    <Routes>
-      <Route path='/' element={<Home />} />
-    </Routes>
+    <Layout>
+      <Routes>
+        <Route path='/' element={<Home />} />
+      </Routes>
+    </Layout>
+    
   );
 }
 
