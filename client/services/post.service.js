@@ -39,9 +39,62 @@ export const editPost = (
 }
 
 //delete post
+export const deletePost = (_id) => {
+    return axios.delete(API_URL + 'delete', {
+        data: {
+            _id: _id
+        }
+    })
+}
 
 //upvote post
+export const upvote = (
+    id,
+    authorId
+) => {
+    return axios.put(API_URL + 'upvote', {
+        id,
+        authorId
+    })
+}
 
 //downvote post
+export const downvote = (
+    id,
+    authorId
+) => {
+    return axios.put(API_URL + 'downvote', {
+        id,
+        authorId
+    })
+}
 
 //repost a post
+export const repost = (
+    title,
+    body,
+    originalAuthor,
+    originalPost,
+    userId,
+    isRepost
+) => {
+    return axios.put(API_URL + 'repost', {
+        title,
+        body,
+        originalAuthor,
+        originalPost,
+        userId,
+        isRepost
+    })
+}
+
+//favorite a post
+export const favoritePost = (
+    id,
+    userId
+) => {
+    return axios.put(API_URL + 'favorite', {
+        id,
+        userId
+    })
+}
