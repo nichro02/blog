@@ -9,12 +9,14 @@ import BlogPosts from './components/BlogPosts'
 import BlogPostsForm from './components/BlogPostsForm'
 import Home from './components/Home/Home'
 import Layout from './components/Layout/Layout'
+import SignUp from './components/SignUp/SignUp'
 
 function App() {
   return (
     <Layout>
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path='/register' element={<SignUp />} />
       </Routes>
     </Layout>
     
