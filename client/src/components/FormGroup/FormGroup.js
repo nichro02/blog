@@ -8,3 +8,5 @@ const FormGroup = ({children, text}) => {
         </div>
     )
 }
+
+export default FormGroup

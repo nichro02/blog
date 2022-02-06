@@ -68,18 +68,21 @@ const SignUp = (props) => {
     //store username onChange
     const onChangeUsername = e => {
         const username = e.target.value
+        console.log('UPDATED USERNAME TO ', username)
         setUsername(username)
     }
 
     //store password onChange
     const onChangePassword = e => {
         const password = e.target.value
+        console.log('PASSWORD UPDATED TO ', password)
         setPassword(password)
     }
 
     //store email onChange
     const onChangeEmail = e => {
         const email = e.target.value
+        console.log('EMAIL UPDATED TO ', email)
         setEmail(email)
     }
 
@@ -93,7 +96,7 @@ const SignUp = (props) => {
 
         //validate form fields
         form.current.validateAll()
-
+        //console.log(checkButton.current.context)
         //check to see if errors exist
         if(checkButton.current.context._errors.length === 0){
             register(username, email, password)
@@ -103,7 +106,7 @@ const SignUp = (props) => {
 
                 login(username, password)
                 .then(() => {
-                    props.history.push('//home')
+                    props.history.push('/home')
                     window.location.reload()
                 })
             },
@@ -116,7 +119,48 @@ const SignUp = (props) => {
     }
     
     return(
-        <h1>Sign-inForm goes here</h1>
+        <div>
+            <div>
+                <Form
+                    onSubmit={handleSignup}
+                    ref={form}
+                >
+                    <FormGroup text='username'>
+                        <Input
+                            type='text'
+                            className='form-control'
+                            name='username'
+                            value={username}
+                            onChange={onChangeUsername}
+                            validations={[requiredField, validateUsername]}
+                        />
+                    </FormGroup>
+                    <FormGroup text='email'>
+                        <Input
+                            type='text'
+                            className='form-control'
+                            name='email'
+                            value={email}
+                            onChange={onChangeEmail}
+                            validations={[requiredField, validateEmail]}
+                        />
+                    </FormGroup>
+                    <FormGroup text='password'>
+                        <Input
+                            type='password'
+                            className='form-control'
+                            name='password'
+                            value={password}
+                            onChange={onChangePassword}
+                            validations={[requiredField, validatePassword]}
+                        />
+                    </FormGroup>
+                    <button>Sign Up</button>
+
+                    <CheckButton style={{ display: "none" }} ref={checkButton} />
+                </Form>
+            </div>
+        </div>
     )
 }
 
