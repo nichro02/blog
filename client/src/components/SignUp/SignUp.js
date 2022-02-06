@@ -3,6 +3,7 @@ import Form from 'react-validation/build/form'
 import Input from 'react-validation/build/input'
 import CheckButton from 'react-validation/build/button'
 import { isEmail } from 'validator'
+import { useNavigate } from 'react-router-dom'
 
 //import components
 import FormGroup from '../FormGroup/FormGroup'
@@ -57,6 +58,7 @@ const validateEmail = (value) => {
 const SignUp = (props) => {
     const form = useRef()
     const checkButton = useRef()
+    const navigate = useNavigate()
 
     //manage state
     const [username, setUsername] = useState("")
@@ -94,6 +96,8 @@ const SignUp = (props) => {
         setMessage('')
         setSuccessful(false)
 
+        
+
         //validate form fields
         form.current.validateAll()
         //console.log(checkButton.current.context)
@@ -103,12 +107,13 @@ const SignUp = (props) => {
             .then(response => {
                 setMessage(response.data.message)
                 setSuccessful(true)
-
-                login(username, password)
-                .then(() => {
-                    props.history.push('/home')
-                    window.location.reload()
-                })
+                navigate('/')
+                // login(username, password)
+                // .then(() => {
+                    
+                //     props.history.push('/')
+                //     window.location.reload()
+                // })
             },
             (error) => {
                 setMessage(error)
