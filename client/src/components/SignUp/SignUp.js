@@ -107,7 +107,7 @@ const SignUp = (props) => {
             .then(response => {
                 setMessage(response.data.message)
                 setSuccessful(true)
-                navigate('/')
+                navigate('/login')
                 // login(username, password)
                 // .then(() => {
                     
