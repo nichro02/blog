@@ -1,5 +1,5 @@
 import { useState, useEffect} from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { getCurrentUser, logout } from '../../services/auth.service'
 
 
@@ -20,10 +20,46 @@ const Layout = (props) => {
         logout()
     }
 
+    let profileUrl=null
+
+    if(currentUser){
+        profileUrl='/profile/' + currentUser.id
+    }
+
     return(
         <div>
             <nav>
-                <h1>This is the navbar</h1>
+                <Link to='/'>
+                    <strong>App Name</strong>
+                </Link>
+                <div>
+                    <li>
+                        <Link to={'/'}>Home</Link>
+                    </li>
+                    {currentUser && (
+                        <li>
+                            <Link to={profileUrl}>My Profile</Link>
+                        </li>
+                    )}
+                    {currentUser ? (
+                        <div>
+                            <li>
+                                <a href='/login' onClick={removeUser}>
+                                    Logout
+                                </a>
+                            </li>
+                        </div>    
+                    ) : (
+                        <div>
+                            <li>
+                                <Link to={'/login'}> Log In</Link>
+                            </li>
+                            <li>
+                                <Link to={'/register'}> Sign Up</Link>
+                            </li>
+                        </div>
+                    )}
+                </div>
             </nav>
             <div>{props.children}</div>
         </div>
