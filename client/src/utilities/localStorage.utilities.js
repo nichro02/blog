@@ -14,5 +14,6 @@ export const setItem = (key, data) => {
 
 //remove item from local storage
 export const removeItem = key => {
-    return localStorage.removeItem(key)
+    //return localStorage.removeItem(key)
+    return localStorage.clear()
 }

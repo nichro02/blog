@@ -32,5 +32,7 @@ export const getCurrentUser = () => {
 }
 //logout user
 export const logout = () => {
-    removeItem('user')
+    //removeItem('user')
+    removeItem()
+    window.location.reload()
 }
