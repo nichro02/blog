@@ -1,6 +1,13 @@
+import { useState, useEffect } from 'react'
+import BlogPostForm from '../BlogPostsForm/BlogPostsForm'
+
 const Home = () => {
     return(
-        <h1>Hello world from the home component</h1>
+        <div>
+            <h1>Hello world from the home component</h1>
+            <BlogPostForm />
+        </div>
+        
         
     )
 }
