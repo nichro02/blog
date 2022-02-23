@@ -1,9 +1,14 @@
 import { useState } from 'react'
 import { getCurrentUser } from '../../services/auth.service'
 import { newPost } from '../../services/post.service'
+// import Form from 'react-validation/build/form'
+// import Input from 'react-validation/build/input'
+
+//import components
+import FormGroup from '../FormGroup/FormGroup'
 
 const BlogPostForm = (props) => {
-
+    //const form = useRef()
     //manage state
     const [post, setPost] = useState("")
     
@@ -18,7 +23,6 @@ const BlogPostForm = (props) => {
     //handle post submission
     const handleNewPost = e => {
         const tags = []
-        
         //push tags to tags array
         let tagArray = post.split(" ")
         tagArray.forEach(word => {
@@ -28,7 +32,23 @@ const BlogPostForm = (props) => {
 
     return(
         <div>
-            New Blog Post Form
+            {currentUser && (
+                <form onSubmit={handleNewPost}>
+                    <div>
+                        <textarea
+                            value={post}
+                            onChange={onChange}
+                            placeholder='Write your post here'
+                        ></textarea>
+                        <button
+                            type='submit'
+                            value='Submit'
+                        >
+                            Submit
+                        </button>
+                    </div>
+                </form>
+            )}
         </div>
     )
 }
