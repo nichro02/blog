@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { getCurrentUser } from '../../services/auth.service'
-import { newPost } from '../../services/post.service'
+import { newPost, reply } from '../../services/post.service'
 // import Form from 'react-validation/build/form'
 // import Input from 'react-validation/build/input'
 
@@ -22,12 +22,24 @@ const BlogPostForm = (props) => {
 
     //handle post submission
     const handleNewPost = e => {
+        const originalPost = props.originalPost.id
+        const originalAuthor = props.originalAuthor.author
         const tags = []
         //push tags to tags array
         let tagArray = post.split(" ")
         tagArray.forEach(word => {
-            tags.push(word)
+            if(word.charAt(0) === '#') {
+                tags.push(word)
+            }
         })
+        if (originalPost) {
+            reply(
+                post,
+                tags,
+                originalAuthor,
+                originalPost
+            )
+        }
     }
 
     return(

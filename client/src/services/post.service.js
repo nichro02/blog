@@ -98,3 +98,20 @@ export const favoritePost = (
         userId
     })
 }
+
+//reply to a post
+export const reply = (
+    title,
+    body,
+    tags,
+    originalAuthor,
+    originalPost
+) => {
+    return axios.put(API_URL + 'reply', {
+        title,
+        body,
+        tags,
+        originalAuthor,
+        originalPost
+    })
+}

@@ -265,6 +265,8 @@ exports.reply = (req, res) => {
         title,
         body,
         tags,
+        originalAuthor,
+        originalPost
     })
     reply.author = req.body.userId
     reply.isReply = true
