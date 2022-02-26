@@ -10,7 +10,8 @@ import FormGroup from '../FormGroup/FormGroup'
 const BlogPostForm = (props) => {
     //const form = useRef()
     //manage state
-    const [post, setPost] = useState("")
+    const [post, setPost] = useState('')
+    const [title, setTitle] = useState('')
     
     const currentUser = getCurrentUser()
 
@@ -20,10 +21,18 @@ const BlogPostForm = (props) => {
         setPost(content)
     }
 
+    //track title changes
+    const onChangeTitle = e => {
+        const content = e.target.value
+        setTitle(content)
+    }
+
     //handle post submission
     const handleNewPost = e => {
-        const originalPost = props.originalPost.id
-        const originalAuthor = props.originalAuthor.author
+        e.preventDefault()
+        console.log(props)
+        const originalPost = props.originalPost
+        const originalAuthor = props.originalAuthor
         const tags = []
         //push tags to tags array
         let tagArray = post.split(" ")
@@ -34,10 +43,19 @@ const BlogPostForm = (props) => {
         })
         if (originalPost) {
             reply(
+                title,
                 post,
                 tags,
                 originalAuthor,
                 originalPost
+            )
+        } else {
+            
+            newPost(
+                title,
+                post,
+                tags,
+                currentUser.id
             )
         }
     }
@@ -47,6 +65,12 @@ const BlogPostForm = (props) => {
             {currentUser && (
                 <form onSubmit={handleNewPost}>
                     <div>
+                        <textarea
+                            value={title}
+                            onChange={onChangeTitle}
+                            placeholder='Write your title here'
+                        >
+                        </textarea>
                         <textarea
                             value={post}
                             onChange={onChange}
