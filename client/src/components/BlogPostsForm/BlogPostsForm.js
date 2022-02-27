@@ -29,8 +29,8 @@ const BlogPostForm = (props) => {
 
     //handle post submission
     const handleNewPost = e => {
-        e.preventDefault()
-        console.log(props)
+        // e.preventDefault()
+        // console.log(props)
         const originalPost = props.originalPost
         const originalAuthor = props.originalAuthor
         const tags = []
