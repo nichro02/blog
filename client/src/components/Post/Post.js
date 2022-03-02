@@ -50,7 +50,11 @@ const Post = props => {
 
     return(
         <div>
-            Post goes here
+            {postData.title}
+            {postData.body}
+            {postData.upvote}
+            {postData.downvote}
+            {postData.author[0].username}
         </div>
     )
 }

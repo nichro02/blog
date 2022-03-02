@@ -11,7 +11,7 @@ const Home = (props) => {
     useEffect(() => {
         allPosts().
             then(response => {
-                console.log(response)
+                //console.log(response)
                 setPostFeed(response.data)
             }).
                 catch(error => {

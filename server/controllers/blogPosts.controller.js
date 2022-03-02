@@ -8,7 +8,10 @@ const BlogPost = db.blogPost
 //get all blog posts
 exports.getAllBlogPosts = async (req, res) => {
     try {
-        const posts = await BlogPost.find()
+        const posts = await BlogPost.find().populate({
+            path: 'author',
+            model: 'User'
+        })
         res.status(200).json(posts)
     } catch (error) {
         res.status(404).json({message: error.message})
