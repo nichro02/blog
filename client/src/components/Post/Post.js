@@ -25,6 +25,7 @@ const Post = props => {
 
     const currentUser=getCurrentUser()
     let postData = props.post
+    console.log(postData)
 
     //actions on post
     const editPost = () => {
