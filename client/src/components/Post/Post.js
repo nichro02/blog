@@ -27,6 +27,16 @@ const Post = props => {
     let postData = props.post
     console.log(postData)
 
+    //useEffect to determine which buttons/actions are available to a user for each post
+    useEffect(() => {
+        setUpvote(postData.upvote)
+        setDownvote(postData.downvote)
+        setNumberOfReposts(postData.reposts)
+        if(postData.isRepost===true){
+            setIsRepost(true)
+        }
+    })
+
     //actions on post
     const editPost = () => {
         setEdit(true)
@@ -55,6 +65,11 @@ const Post = props => {
             {postData.upvote}
             {postData.downvote}
             {postData.author[0].username}
+            {(currentUser && postData.author[0]._id === currentUser.id) && (
+                <div>
+                    <button onClick={editPost}>Edit</button>
+                </div>
+            )}
         </div>
     )
 }
