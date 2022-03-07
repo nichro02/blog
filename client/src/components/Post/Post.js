@@ -67,6 +67,11 @@ const Post = props => {
         window.location.reload()
     }
     //increment favorite
+    const handleFavorite = () => {
+        setNumberOfFavorites(postData.favorites + 1)
+        favoritePost(postData._id,currentUser.id,numberOfFavorites)
+        window.location.reload()
+    }
     //handle reply
 
     return(
@@ -86,6 +91,7 @@ const Post = props => {
                 <div>
                     <button onClick={countUpvote}>Upvote</button>
                     <button onClick={countDownvote}>Downvote</button>
+                    <button onClick={handleFavorite}>Favorite</button>
                 </div>
             ))}
         </div>

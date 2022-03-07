@@ -95,11 +95,13 @@ export const repost = (
 //favorite a post
 export const favoritePost = (
     id,
-    userId
+    userId,
+    favoriteCount
 ) => {
     return axios.put(API_URL + 'favorite', {
         id,
-        userId
+        userId,
+        favoriteCount
     })
 }
 
