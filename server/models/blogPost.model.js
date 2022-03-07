@@ -34,6 +34,10 @@ const Post = mongoose.model(
             type: Number,
             default: 0,
         },
+        favorites: {
+            type: Number,
+            default: 0,
+        },
         originalPost: [{type: mongoose.Schema.Types.ObjectId, ref: 'Post'}],
         originalAuthor: String,
     })

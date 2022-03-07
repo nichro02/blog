@@ -15,8 +15,8 @@ const Post = props => {
     const [exists, setExist] = useState(true)
     const [favorite, setFavorite] = useState(false)
     const [numberOfFavorites, setNumberOfFavorites] = useState(0)
-    const [upvote, setUpvote] = useState(0)
-    const [downvote, setDownvote] = useState(0)
+    const [upvoteCount, setUpvoteCount] = useState(0)
+    const [downvoteCount, setDownvoteCount] = useState(0)
     const [original, setOriginal] = useState(null)
     const [IsRepost, setIsRepost] = useState(false)
     const [numberOfReposts, setNumberOfReposts] = useState(0)
@@ -29,8 +29,8 @@ const Post = props => {
 
     //useEffect to determine which buttons/actions are available to a user for each post
     useEffect(() => {
-        setUpvote(postData.upvote)
-        setDownvote(postData.downvote)
+        setUpvoteCount(postData.upvote)
+        setDownvoteCount(postData.downvote)
         setNumberOfReposts(postData.reposts)
         if(postData.isRepost===true){
             setIsRepost(true)
@@ -54,7 +54,18 @@ const Post = props => {
     }
 
     //increment upvote
+    const countUpvote = () => {
+        setUpvoteCount(postData.upvote + 1)
+        //console.log(upvoteCount)
+        upvote(postData._id,postData.author[0]._id,upvoteCount)
+        window.location.reload()
+    }
     //increment downvote
+    const countDownvote = () => {
+        setDownvoteCount(postData.downvote + 1)
+        downvote(postData._id,postData.author[0]._id,downvoteCount)
+        window.location.reload()
+    }
     //increment favorite
     //handle reply
 
@@ -68,8 +79,15 @@ const Post = props => {
             {(currentUser && postData.author[0]._id === currentUser.id) && (
                 <div>
                     <button onClick={editPost}>Edit</button>
+                    
                 </div>
             )}
+            {(currentUser && (
+                <div>
+                    <button onClick={countUpvote}>Upvote</button>
+                    <button onClick={countDownvote}>Downvote</button>
+                </div>
+            ))}
         </div>
     )
 }

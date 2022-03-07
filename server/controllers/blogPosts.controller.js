@@ -185,6 +185,19 @@ exports.favoritePost = (req, res) => {
             }
         }
     )
+    BlogPost.findByIdAndUpdate(req.body.id, {$inc:{favorites: 1}},
+        (error, post) => {
+            if(error){
+                res.status(500).send({message: err})
+                return
+            } else {
+                //res.send({message: 'Upvote processed'})
+                console.log('Upvote count on post processed')
+                //return
+            }
+
+        }
+    )
 }
 
 //remove post from user's favorites arrary
