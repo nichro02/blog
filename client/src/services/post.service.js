@@ -80,7 +80,7 @@ export const repost = (
     originalAuthor,
     originalPost,
     userId,
-    isRepost
+    //isRepost
 ) => {
     return axios.put(API_URL + 'repost', {
         title,
@@ -88,7 +88,7 @@ export const repost = (
         originalAuthor,
         originalPost,
         userId,
-        isRepost
+        //isRepost
     })
 }
 

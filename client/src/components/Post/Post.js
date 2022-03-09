@@ -47,8 +47,8 @@ const Post = props => {
         setExist(false)
     }
     const makeRepost = async () => {
-        const flagRepost = setIsRepost(true)
-        await repost(postData.title, postData.body, postData.originalAuthor, postData._id, currentUser.id, flagRepost)
+        //const flagRepost = setIsRepost(true)
+        await repost(postData.title, postData.body, postData.originalAuthor, postData._id, currentUser.id)
         setNumberOfReposts(numberOfReposts + 1)
         setDisableRepost(true)
     }
@@ -92,6 +92,7 @@ const Post = props => {
                     <button onClick={countUpvote}>Upvote</button>
                     <button onClick={countDownvote}>Downvote</button>
                     <button onClick={handleFavorite}>Favorite</button>
+                    <button onClick={makeRepost}>Repost</button>
                 </div>
             ))}
         </div>
