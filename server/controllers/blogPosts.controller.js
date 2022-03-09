@@ -227,6 +227,7 @@ exports.rePost = async (req, res) => {
     })
     rePost.author = req.body.userId
     rePost.isRepost = true
+    rePost.originalPost = originalPost
     
     //save re-post to user's array of posts
     User.findById(req.body.userId, (error, user) =>{
@@ -256,8 +257,10 @@ exports.rePost = async (req, res) => {
             }
         })
     })
+    
+    
     //update repost count on original post
-    await BlogPost.findByIdAndUpdate(originalPost,{$inc: {reposts: 1}},
+    await BlogPost.findByIdAndUpdate({'_id':originalPost},{$inc: {reposts: 1},$push: {userReposts: rePost.author}},
         (error, author) => {
             if(error){
                 res.status(500).send({message: err})
@@ -268,6 +271,19 @@ exports.rePost = async (req, res) => {
             }
 
         })
+        
+        // BlogPost.findByIdAndUpdate(originalPost,{$push: {userReposts: rePost.author}},
+        //     (error, author) => {
+        //         if(error){
+        //             res.status(500).send({message: err})
+        //                 return
+        //         } else {
+        //             res.send({message: 'Repost count updated'})
+        //             console.log(`${rePost.author} pushed to userReposts array`)
+        //         }
+        
+        //     })
+        
 }
 
 //reply to a post

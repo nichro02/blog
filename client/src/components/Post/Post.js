@@ -92,9 +92,12 @@ const Post = props => {
                     <button onClick={countUpvote}>Upvote</button>
                     <button onClick={countDownvote}>Downvote</button>
                     <button onClick={handleFavorite}>Favorite</button>
-                    <button onClick={makeRepost}>Repost</button>
+                    
                 </div>
             ))}
+            {(currentUser && postData.userReposts.indexOf(currentUser.id) === -1) && (
+                <button onClick={makeRepost}>Repost</button>
+            )}
         </div>
     )
 }
