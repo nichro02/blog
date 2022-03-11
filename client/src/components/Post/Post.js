@@ -95,7 +95,7 @@ const Post = props => {
                     <button onClick={countUpvote}>Upvote</button>
                     <button onClick={countDownvote}>Downvote</button>
                     <button onClick={handleFavorite}>Favorite</button>
-                    <Link to={`/post/${postData._id}`}>
+                    <Link to={`/post/${postData._id}`} state={{from: postData}}>
                         Reply
                     </Link>
                     
