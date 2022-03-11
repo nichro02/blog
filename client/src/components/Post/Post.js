@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { getCurrentUser } from '../../services/auth.service'
+import { Link } from 'react-router-dom'
 import EditPost from '../EditPost/EditPost'
 import {
     deletePost,
@@ -73,7 +74,9 @@ const Post = props => {
         window.location.reload()
     }
     //handle reply
-
+    const handleReply = () => {
+        console.log('REPLY')
+    }
     return(
         <div>
             {postData.title}
@@ -92,6 +95,9 @@ const Post = props => {
                     <button onClick={countUpvote}>Upvote</button>
                     <button onClick={countDownvote}>Downvote</button>
                     <button onClick={handleFavorite}>Favorite</button>
+                    <Link to={`/post/${postData._id}`}>
+                        Reply
+                    </Link>
                     
                 </div>
             ))}
