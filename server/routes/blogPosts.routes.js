@@ -41,7 +41,7 @@ module.exports = function(app) {
     app.put('/api/post/reply', controller.reply)
 
     //Get single post
-    app.get('/api/post/:idx', controller.getOnePost)
+    app.get('/api/post/:id', controller.getOnePost)
 
 }
 

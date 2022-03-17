@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useLocation,useNavigate } from 'react-router-dom'
-import { reply } from '../../services/post.service'
+import { onePost,reply } from '../../services/post.service'
 import { useParams } from 'react-router'
 import { getCurrentUser } from '../../services/auth.service'
 
@@ -13,16 +13,25 @@ const Reply = (props) => {
     console.log(id)
     const { from } = location.state
     //const originalPost = from._id
-    console.log(from)
+    //console.log(from)
     // console.log(from.title)
     //manage state
     const [post, setPost] = useState('')
     const [originalAuthor, setOriginalAuthor] = useState('')
     const [originalPost,setOriginalPost] = useState('')
     const [test, setTest] = useState({})
-    
+
     // need to use URL param to preserve reply information
-    
+    const getOriginalPost = () => {
+        onePost(id)
+        .then(response => {
+            console.log(response)
+        })
+    }
+
+    useEffect(() => {
+        getOriginalPost()
+    }, [])
     
     //track post form changes
     const onChange = e => {

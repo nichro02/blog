@@ -1,5 +1,6 @@
 const db = require('../models/index')
 const { populate } = require('../models/user.model')
+require('../models/blogPost.model')
 
 //Access database through User and BlogPost
 const User = db.user
@@ -64,12 +65,13 @@ exports.addNewPost = async (req, res) => {
 }
   //get single post
   exports.getOnePost = (req, res) => {
-    const id = req.params.idx
+    const id = req.params.id
+    console.log(req.params)
     BlogPost.find({_id: id})
-    .populate({
-        path: 'replies',
-        model: 'BlogPost'
-    })
+    // .populate({
+    //     path: 'repliesArray',
+    //     model: 'BlogPost'
+    // })
     .populate({
         path: 'author',
         model: 'User'
@@ -78,6 +80,7 @@ exports.addNewPost = async (req, res) => {
         if(!post){
             return res.status(400).send({message: 'Error retrieving post'})
         } else {
+            console.log(post)
             res.send(post)
         }
     })

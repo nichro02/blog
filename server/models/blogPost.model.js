@@ -41,6 +41,7 @@ const Post = mongoose.model(
         originalPost: [{type: mongoose.Schema.Types.ObjectId, ref: 'Post'}],
         originalAuthor: String,
         userReposts:[{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+        repliesArray: [{type: mongoose.Schema.Types.ObjectId, ref: 'Post'}]
     })
 )
 

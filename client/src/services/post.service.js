@@ -8,8 +8,8 @@ export const allPosts = () => {
 }
 
 //get single post
-export const onePost = (idx) => {
-    return axios.get(API_URL + idx)
+export const onePost = (id) => {
+    return axios.get(API_URL + id)
 }
 
 //create new post
