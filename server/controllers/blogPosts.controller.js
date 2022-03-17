@@ -1,6 +1,6 @@
 const db = require('../models/index')
 const { populate } = require('../models/user.model')
-require('../models/blogPost.model')
+
 
 //Access database through User and BlogPost
 const User = db.user
@@ -66,11 +66,15 @@ exports.addNewPost = async (req, res) => {
   //get single post
   exports.getOnePost = (req, res) => {
     const id = req.params.id
-    console.log(req.params)
+    console.log('PARAMS ', req.params)
     BlogPost.find({_id: id})
     // .populate({
     //     path: 'repliesArray',
-    //     model: 'BlogPost'
+    //     model: 'BlogPost',
+    //     populate: {
+    //         path: 'author',
+    //         model: 'User'
+    //     }
     // })
     .populate({
         path: 'author',
@@ -80,7 +84,7 @@ exports.addNewPost = async (req, res) => {
         if(!post){
             return res.status(400).send({message: 'Error retrieving post'})
         } else {
-            console.log(post)
+            console.log('SENDING BACK: ',post)
             res.send(post)
         }
     })
@@ -290,7 +294,7 @@ exports.rePost = async (req, res) => {
 }
 
 //reply to a post
-exports.reply = (req, res) => {
+exports.reply = async (req, res) => {
     //set up similar to repost
     //create a post record and pull in info about originating post
     const { title, body, tags, originalAuthor, originalPost } = req.body
@@ -333,4 +337,15 @@ exports.reply = (req, res) => {
             }
         })
     })
+    await BlogPost.findByIdAndUpdate({'_id':originalPost},{$push: {repliesArray: reply._id}},
+        (error, author) => {
+            if(error){
+                res.status(500).send({message: err})
+                return
+            } else {
+                res.send({message: 'Repost count updated'})
+                console.log('Repost count updated on original post')
+            }
+
+        })
 }
