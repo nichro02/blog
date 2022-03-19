@@ -11,21 +11,27 @@ const Reply = (props) => {
     const navigate = useNavigate()
     const { id } = useParams()
     console.log(id)
-    const { from } = location.state
+    //const { from } = location.state
     //const originalPost = from._id
     //console.log(from)
     // console.log(from.title)
     //manage state
+    const [title, setTitle] = useState('')
     const [post, setPost] = useState('')
     const [originalAuthor, setOriginalAuthor] = useState('')
-    const [originalPost,setOriginalPost] = useState('')
+    const [originalPostBody,setOriginalPostBody] = useState('')
+    const [originalPostId,setOriginalPostId] = useState('')
     const [test, setTest] = useState({})
 
     // need to use URL param to preserve reply information
     const getOriginalPost = () => {
         onePost(id)
         .then(response => {
-            console.log(response)
+            console.log(response.data[0])
+            setTitle(response.data[0].title)
+            setOriginalPostBody(response.data[0].body)
+            setOriginalPostId(response.data[0]._id)
+            setOriginalAuthor(response.data[0].author[0])
         })
     }
 
@@ -43,6 +49,7 @@ const Reply = (props) => {
         // const originalAuthor = from.author[0]._id
         // const originalPost = from.id
         const tags = []
+        const author=currentUser.id
         //push tags to tags array
         let tagArray = post.split(" ")
         tagArray.forEach(word => {
@@ -51,28 +58,27 @@ const Reply = (props) => {
             }
         })
         reply(
+            title,
             post,
             tags,
-            originalAuthor,
-            originalPost
+            originalAuthor._id,
+            originalPostId,
+            author
         )
         // navigate(`/post/${from.id}`)
     }
 
-    // const returnToPost = () => {
-    //     navigate(`/post/${from.id}`)
-    // }
-
     return(
         <div>
             <div>
-            {from.title}
-            {from.body}
-            Upvotes: {from.upvote}
-            Downvotes: {from.downvote}
-            Replies: {from.replies}
-            Reposts: {from.reposts}
-            Favorites: {from.favorites}
+            {title}
+            {originalPostBody}
+            {originalAuthor.username}
+            Upvotes: 
+            Downvotes: 
+            Replies: 
+            Reposts: 
+            Favorites: 
             </div>
             <div>
             {currentUser && (

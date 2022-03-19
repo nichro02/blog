@@ -294,23 +294,25 @@ exports.rePost = async (req, res) => {
 }
 
 //reply to a post
-exports.reply = async (req, res) => {
+exports.reply = (req, res) => {
     //set up similar to repost
     //create a post record and pull in info about originating post
-    const { title, body, tags, originalAuthor, originalPost } = req.body
-
+    const { title, body, tags, originalAuthor, originalPost, author } = req.body
+    console.log('REQ.BODY --->',req.body)
     //set up new record
     const reply = new BlogPost({
         title,
         body,
         tags,
         originalAuthor,
-        originalPost
+        originalPost,
+        author
     })
-    reply.author = req.body.userId
+    // reply.author = userId
     reply.isReply = true
     //save re-post to user's array of posts
-    User.findById(req.body.userId, (error, user) =>{
+    User.findById(author, (error, user) =>{
+        console.log('USER--->',user)
         //add new post id to posts array
         if(error) {
             res.status(500).send({message: 'There was an errror adding the reply'})
@@ -337,14 +339,14 @@ exports.reply = async (req, res) => {
             }
         })
     })
-    await BlogPost.findByIdAndUpdate({'_id':originalPost},{$push: {repliesArray: reply._id}},
+    BlogPost.findByIdAndUpdate({'_id':originalPost},{$push: {repliesArray: reply._id}},
         (error, author) => {
             if(error){
-                res.status(500).send({message: err})
+                res.status(500).send({message: error})
                 return
             } else {
-                res.send({message: 'Repost count updated'})
-                console.log('Repost count updated on original post')
+                res.send({message: 'Reply array updated'})
+                console.log('Reply array updated')
             }
 
         })

@@ -111,13 +111,15 @@ export const reply = (
     body,
     tags,
     originalAuthor,
-    originalPost
+    originalPost,
+    author
 ) => {
     return axios.put(API_URL + 'reply', {
         title,
         body,
         tags,
         originalAuthor,
-        originalPost
+        originalPost,
+        author
     })
 }
