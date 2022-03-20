@@ -46,6 +46,8 @@ const Post = props => {
     const deleteThisPost = () => {
         deletePost(postData._id)
         setExist(false)
+        window.location.reload()
+        console.log('DELETED POST: ', postData._id)
     }
     const makeRepost = async () => {
         //const flagRepost = setIsRepost(true)
@@ -87,7 +89,7 @@ const Post = props => {
             {(currentUser && postData.author[0]._id === currentUser.id) && (
                 <div>
                     <button onClick={editPost}>Edit</button>
-                    
+                    <button onClick={deleteThisPost}>Delete</button>
                 </div>
             )}
             {(currentUser && (

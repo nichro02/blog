@@ -107,7 +107,8 @@ exports.updateOnePost = (req, res) => {
 
 //delete single post
 exports.deletePost = (req, res) => {
-    const id = req.body.id
+    console.log('---->',req.body)
+    const id = req.body._id
     BlogPost.deleteOne({_id: id})
     .then(data => {
         if(!data){
