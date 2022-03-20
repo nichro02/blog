@@ -232,10 +232,12 @@ exports.rePost = async (req, res) => {
         title,
         body,
         tags,
+        originalAuthor,
+        originalPost
     })
     rePost.author = req.body.userId
     rePost.isRepost = true
-    rePost.originalPost = originalPost
+    //rePost.originalPost = originalPost
     
     //save re-post to user's array of posts
     User.findById(req.body.userId, (error, user) =>{

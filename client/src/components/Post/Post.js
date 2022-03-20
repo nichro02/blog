@@ -51,9 +51,10 @@ const Post = props => {
     }
     const makeRepost = async () => {
         //const flagRepost = setIsRepost(true)
-        await repost(postData.title, postData.body, postData.originalAuthor, postData._id, currentUser.id)
+        await repost(postData.title, postData.body, postData.tags, postData.originalAuthor, postData._id, currentUser.id)
         setNumberOfReposts(numberOfReposts + 1)
         setDisableRepost(true)
+        window.location.reload()
     }
 
     //increment upvote

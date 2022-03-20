@@ -77,6 +77,7 @@ export const downvote = (
 export const repost = (
     title,
     body,
+    tags,
     originalAuthor,
     originalPost,
     userId,
@@ -85,6 +86,7 @@ export const repost = (
     return axios.put(API_URL + 'repost', {
         title,
         body,
+        tags,
         originalAuthor,
         originalPost,
         userId,
