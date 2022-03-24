@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { getCurrentUser } from '../../services/auth.service'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import EditPost from '../EditPost/EditPost'
 import {
     deletePost,
@@ -23,11 +23,13 @@ const Post = props => {
     const [numberOfReposts, setNumberOfReposts] = useState(0)
     const [edit, setEdit] = useState(false)
     const [disableRepost, setDisableRepost] = useState(false)
+    const [params, setParams] = useState(null)
 
     const currentUser=getCurrentUser()
     let postData = props.post
     console.log(postData)
-
+    let navigate = useNavigate()
+    let location = useLocation()
     //useEffect to determine which buttons/actions are available to a user for each post
     useEffect(() => {
         setUpvoteCount(postData.upvote)
@@ -36,7 +38,7 @@ const Post = props => {
         if(postData.isRepost===true){
             setIsRepost(true)
         }
-    })
+    }, [])
 
     //actions on post
     const editPost = () => {
@@ -46,6 +48,7 @@ const Post = props => {
     const deleteThisPost = () => {
         deletePost(postData._id)
         setExist(false)
+        navigate('/')
         window.location.reload()
         console.log('DELETED POST: ', postData._id)
     }
