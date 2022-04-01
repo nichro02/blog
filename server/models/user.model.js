@@ -22,6 +22,8 @@ const User = mongoose.model(
             type: Number,
             default: 0,
         },
+        upvotePosts: [{type: mongoose.Schema.Types.ObjectId, ref: 'Post'}],
+        downvotePosts: [{type: mongoose.Schema.Types.ObjectId, ref: 'Post'}],
         location: String,
         locationId: String,
         birthday: Date,

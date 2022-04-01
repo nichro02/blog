@@ -51,12 +51,14 @@ export const deletePost = (_id) => {
 export const upvote = (
     id,
     authorId,
-    upvote
+    upvote,
+    userId
 ) => {
     return axios.put(API_URL + 'upvote', {
         id,
         authorId,
-        upvote
+        upvote,
+        userId
     })
 }
 

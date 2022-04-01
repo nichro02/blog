@@ -63,8 +63,8 @@ const Post = props => {
     //increment upvote
     const countUpvote = () => {
         setUpvoteCount(postData.upvote + 1)
-        //console.log(upvoteCount)
-        upvote(postData._id,postData.author[0]._id,upvoteCount)
+        console.log(currentUser.id)
+        upvote(postData._id,postData.author[0]._id,upvoteCount,currentUser.id)
         window.location.reload()
     }
     //increment downvote

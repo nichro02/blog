@@ -136,18 +136,29 @@ exports.upvote = (req, res) => {
         }
     )
     //add upvote to author's user record
-    User.findByIdAndUpdate(req.body.authorId, {$inc: {upvote: 1}},
+    User.findByIdAndUpdate(req.body.authorId, {$inc: {upvote: 1}, $push: {upvotePosts: req.body.id}},
         (error, author) => {
             if(error){
                 res.status(500).send({message: err})
                 return
             } else {
-                res.send({message: 'Upvote processed'})
+                //res.send({message: 'Upvote processed'})
                 console.log('Upvote count on user updated')
                 //return
             }
         }
     )
+    User.findByIdAndUpdate(req.body.userId, {$push: {upvotePosts: req.body.id}},
+        (error, author) => {
+            if(error){
+                res.status(500).send({message: err})
+                return
+            } else {
+                res.send({message: 'CurrentUser upvote array updated'})
+                console.log(`Upvote array on ${req.body.userId} updated`)
+                //return
+            }
+        })
 }
 
 //downvote a single vote
@@ -281,19 +292,6 @@ exports.rePost = async (req, res) => {
             }
 
         })
-        
-        // BlogPost.findByIdAndUpdate(originalPost,{$push: {userReposts: rePost.author}},
-        //     (error, author) => {
-        //         if(error){
-        //             res.status(500).send({message: err})
-        //                 return
-        //         } else {
-        //             res.send({message: 'Repost count updated'})
-        //             console.log(`${rePost.author} pushed to userReposts array`)
-        //         }
-        
-        //     })
-        
 }
 
 //reply to a post
