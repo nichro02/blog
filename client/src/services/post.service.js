@@ -66,12 +66,14 @@ export const upvote = (
 export const downvote = (
     id,
     authorId,
-    downvote
+    downvote,
+    userId
 ) => {
     return axios.put(API_URL + 'downvote', {
         id,
         authorId,
-        downvote
+        downvote,
+        userId
     })
 }
 

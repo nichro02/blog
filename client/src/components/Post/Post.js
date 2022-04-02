@@ -70,7 +70,7 @@ const Post = props => {
     //increment downvote
     const countDownvote = () => {
         setDownvoteCount(postData.downvote + 1)
-        downvote(postData._id,postData.author[0]._id,downvoteCount)
+        downvote(postData._id,postData.author[0]._id,downvoteCount,currentUser.id)
         window.location.reload()
     }
     //increment favorite

@@ -183,12 +183,23 @@ exports.downvote = (req, res) => {
                 res.status(500).send({message: err})
                 return
             } else {
-                res.send({message: 'Downvote processed'})
+                //res.send({message: 'Downvote processed'})
                 console.log('Downvote count on user updated')
             }
 
         }
     )
+    User.findByIdAndUpdate(req.body.userId, {$push: {downvotePosts: req.body.id}},
+        (error, author) => {
+            if(error){
+                res.status(500).send({message: err})
+                return
+            } else {
+                res.send({message: 'Downvote processed'})
+                console.log(`Downvote array on ${req.body.userId} updated`)
+                //return
+            }
+        })
 }
 
 //save post to favorites
