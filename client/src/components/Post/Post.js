@@ -24,10 +24,12 @@ const Post = props => {
     const [edit, setEdit] = useState(false)
     const [disableRepost, setDisableRepost] = useState(false)
     const [params, setParams] = useState(null)
+    const [hideDownvote, setHideDownvote] = useState(false)
+    const [hideUpvote, setHideUpvote] = useState(false)
 
     const currentUser=getCurrentUser()
     let postData = props.post
-    console.log(postData)
+    //console.log(postData)
     let navigate = useNavigate()
     let location = useLocation()
     //useEffect to determine which buttons/actions are available to a user for each post
@@ -38,6 +40,13 @@ const Post = props => {
         if(postData.isRepost===true){
             setIsRepost(true)
         }
+        if(currentUser.downvotePosts.indexOf(postData._id) !== -1){
+            setHideDownvote(true)
+        }
+        if(currentUser.upvotePosts.indexOf(postData._id) !== -1){
+            setHideUpvote(true)
+        }
+        //console.log(currentUser)
     }, [])
 
     //actions on post
@@ -65,13 +74,14 @@ const Post = props => {
         setUpvoteCount(postData.upvote + 1)
         console.log(currentUser.id)
         upvote(postData._id,postData.author[0]._id,upvoteCount,currentUser.id)
-        window.location.reload()
+        //window.location.reload()
     }
     //increment downvote
     const countDownvote = () => {
         setDownvoteCount(postData.downvote + 1)
         downvote(postData._id,postData.author[0]._id,downvoteCount,currentUser.id)
-        window.location.reload()
+        setHideDownvote(true)
+        //window.location.reload()
     }
     //increment favorite
     const handleFavorite = () => {
@@ -98,8 +108,7 @@ const Post = props => {
             )}
             {(currentUser && (
                 <div>
-                    <button onClick={countUpvote}>Upvote</button>
-                    <button onClick={countDownvote}>Downvote</button>
+                    
                     <button onClick={handleFavorite}>Favorite</button>
                     <Link to={`/post/${postData._id}`} state={{from: postData}}>
                         Reply
@@ -107,6 +116,16 @@ const Post = props => {
                     
                 </div>
             ))}
+            {(currentUser && (currentUser.upvotePosts.indexOf(postData._id) === -1 ||!hideUpvote)) && (
+                <div>
+                    <button onClick={countUpvote}>Upvote</button>
+                </div>
+            )}
+            {(currentUser && (currentUser.downvotePosts.indexOf(postData._id) === -1 ||!hideDownvote)) && (
+                <div>
+                    <button onClick={countDownvote}>Downvote</button>
+                </div>
+            )}
             {(currentUser && postData.userReposts.indexOf(currentUser.id) === -1) && (
                 <button onClick={makeRepost}>Repost</button>
             )}
