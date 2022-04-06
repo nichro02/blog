@@ -29,7 +29,7 @@ const Post = props => {
 
     const currentUser=getCurrentUser()
     let postData = props.post
-    //console.log(postData)
+    console.log(postData)
     let navigate = useNavigate()
     let location = useLocation()
     //useEffect to determine which buttons/actions are available to a user for each post
@@ -99,7 +99,9 @@ const Post = props => {
             {postData.body}
             {postData.upvote}
             {postData.downvote}
-            {postData.author[0].username}
+            <Link to={`/profile/${postData.author[0]._id}`}>
+                {postData.author[0].username}
+            </Link>
             {(currentUser && postData.author[0]._id === currentUser.id) && (
                 <div>
                     <button onClick={editPost}>Edit</button>

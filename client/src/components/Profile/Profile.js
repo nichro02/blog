@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { getCurrentUser } from '../../services/auth.service'
-import { userProfile } from '../../services/user.service.service'
+import { userProfile } from '../../services/user.service'
 
 const Profile = (props) => {
 

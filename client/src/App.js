@@ -12,6 +12,7 @@ import Layout from './components/Layout/Layout'
 import SignUp from './components/SignUp/SignUp'
 import Login from './components/Login/Login'
 import Reply from './components/Reply/Reply'
+import Profile from './components/Profile/Profile'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path='/register' element={<SignUp />} />
         <Route path='/login' element={<Login />} />
         <Route path='/post/:id' element={<Reply />} />
+        <Route path='/profile/:id' element={<Profile />} />
       </Routes>
     </Layout>
     
