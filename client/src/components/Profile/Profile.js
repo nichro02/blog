@@ -9,7 +9,8 @@ const Profile = (props) => {
     //const [postFeed, setPostFeed] = useState([])
     const { id } = useParams()
     console.log(id)
-    
+    const currentUser=getCurrentUser()
+
     //retrieve user info
     const getUserProfile = () => {
         userProfile(id)
@@ -31,6 +32,9 @@ const Profile = (props) => {
     return(
         <div>
             <h1>{userData.username}</h1>
+            {(currentUser.id !== userData._id && userData.followed.indexOf(currentUser.id) === -1) && (
+                <button>Follow</button>
+            )}
             <h3>Total posts: {userData.posts.length}</h3>
             <h3>Upvotes received: {userData.upvote}</h3>
             <div>
