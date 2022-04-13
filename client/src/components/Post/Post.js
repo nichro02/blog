@@ -98,11 +98,26 @@ const Post = props => {
         console.log('REPLY')
     }
 
-    const theme = createTheme({
-        palette: {
-          first: green,
+    //create color buttons for green(favorite), etc buttons
+    const GreenButton = withStyles((theme) => ({
+        root: {
+          color: theme.palette.getContrastText(green[500]),
+          backgroundColor: green[500],
+          '&:hover': {
+            backgroundColor: green[700],
+          },
         },
-      });
+      }))(Button)
+
+      const PurpleButton = withStyles((theme) => ({
+        root: {
+          color: theme.palette.getContrastText(purple[500]),
+          backgroundColor: purple[500],
+          '&:hover': {
+            backgroundColor: purple[700],
+          },
+        },
+      }))(Button)
 
     return(
         <div>
@@ -121,13 +136,15 @@ const Post = props => {
             )}
             {(currentUser && (
                 <div>
-                    <ThemeProvider theme={theme}>
-                        <Button variant="contained" onClick={handleFavorite}>Favorite</Button>
-                    </ThemeProvider>
+            
+                    <GreenButton variant="contained" color='primary' onClick={handleFavorite}>Favorite</GreenButton>
                     
-                    <Link to={`/post/${postData._id}`} state={{from: postData}}>
+                    <PurpleButton>
+                        <Link to={`/post/${postData._id}`} state={{from: postData}} style={{ textDecoration: 'none', color: 'white'}}>
                         Reply
-                    </Link>
+                        </Link>
+                    </PurpleButton>
+                    
                     
                 </div>
             ))}
