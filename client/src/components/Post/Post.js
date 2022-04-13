@@ -11,6 +11,10 @@ import {
     reply
 } from '../../services/post.service'
 
+import {Button} from '@material-ui/core'
+import { createTheme, withStyles, makeStyles, ThemeProvider } from '@material-ui/core/styles'
+import { green, purple } from '@material-ui/core/colors'
+
 const Post = props => {
     //manage state
     const [exists, setExist] = useState(true)
@@ -93,6 +97,13 @@ const Post = props => {
     const handleReply = () => {
         console.log('REPLY')
     }
+
+    const theme = createTheme({
+        palette: {
+          first: green,
+        },
+      });
+
     return(
         <div>
             {postData.title}
@@ -104,14 +115,16 @@ const Post = props => {
             </Link>
             {(currentUser && postData.author[0]._id === currentUser.id) && (
                 <div>
-                    <button onClick={editPost}>Edit</button>
-                    <button onClick={deleteThisPost}>Delete</button>
+                    <Button variant="contained"color='primary' onClick={editPost}>Edit</Button>
+                    <Button variant="contained" color="secondary" onClick={deleteThisPost}>Delete</Button>
                 </div>
             )}
             {(currentUser && (
                 <div>
+                    <ThemeProvider theme={theme}>
+                        <Button variant="contained" onClick={handleFavorite}>Favorite</Button>
+                    </ThemeProvider>
                     
-                    <button onClick={handleFavorite}>Favorite</button>
                     <Link to={`/post/${postData._id}`} state={{from: postData}}>
                         Reply
                     </Link>
