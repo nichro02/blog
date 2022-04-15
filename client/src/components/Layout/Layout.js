@@ -44,8 +44,8 @@ const Layout = (props) => {
                         
                     )}
                     {currentUser ? (
-                        <div>
-                            <li>
+                        <div style={{display: 'inline'}}>
+                            <li style={{display: 'inline', marginLeft: 20}}>
                                 <a href='/login' onClick={removeUser}>
                                     Logout
                                 </a>
@@ -53,7 +53,7 @@ const Layout = (props) => {
                             
                         </div>    
                     ) : (
-                        <div>
+                        <div style={{display: 'inline'}}>
                             
                                 <Link to={'/login'}> Log In</Link>
                             
