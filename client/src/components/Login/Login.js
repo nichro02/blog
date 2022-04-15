@@ -94,7 +94,7 @@ const Login = (props) => {
                         validations={[requiredField]}
                     />
                 </FormGroup>
-                <button>Sign Up</button>
+                <button>Login</button>
 
                 <CheckButton style={{ display: "none" }} ref={checkButton} />
             </Form>

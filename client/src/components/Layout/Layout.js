@@ -2,6 +2,8 @@ import { useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import { getCurrentUser, logout } from '../../services/auth.service'
 
+import {Tabs, Tab, AppBar, Box} from '@material-ui/core'
+
 
 const Layout = (props) => {
     //structure: container div->nav bar->props.children to wrap components in Layout
@@ -28,18 +30,18 @@ const Layout = (props) => {
 
     return(
         <div>
-            <nav>
+            <AppBar>
                 <Link to='/'>
                     <strong>App Name</strong>
                 </Link>
                 <div>
-                    <li>
+                    
                         <Link to={'/'}>Home</Link>
-                    </li>
+                    
                     {currentUser && (
-                        <li>
+                        
                             <Link to={profileUrl}>My Profile</Link>
-                        </li>
+                        
                     )}
                     {currentUser ? (
                         <div>
@@ -48,20 +50,21 @@ const Layout = (props) => {
                                     Logout
                                 </a>
                             </li>
+                            
                         </div>    
                     ) : (
                         <div>
-                            <li>
+                            
                                 <Link to={'/login'}> Log In</Link>
-                            </li>
-                            <li>
+                            
+                            
                                 <Link to={'/register'}> Sign Up</Link>
-                            </li>
+                            
                         </div>
                     )}
                 </div>
-            </nav>
-            <div>{props.children}</div>
+            </AppBar>
+            <div style={{padding: 80}}>{props.children}</div>
         </div>
     )
 }
