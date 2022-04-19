@@ -30,7 +30,7 @@ const Layout = (props) => {
 
     return(
         <div>
-            <AppBar>
+            <div>
                 <Link to='/'>
                     <strong>App Name</strong>
                 </Link>
@@ -63,7 +63,7 @@ const Layout = (props) => {
                         </div>
                     )}
                 </div>
-            </AppBar>
+            </div>
             <div style={{padding: 80}}>{props.children}</div>
         </div>
     )

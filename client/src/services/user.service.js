@@ -5,6 +5,7 @@ const API_URL = 'http://localhost:4000/api/'
 
 //get user profile
 export const userProfile = (id) => {
+    
     return axios.get(API_URL + 'user/profile/' + id)
 }
 
