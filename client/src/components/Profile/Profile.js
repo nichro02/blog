@@ -4,9 +4,11 @@ import { userProfile } from '../../services/user.service'
 import { useParams } from 'react-router'
 import Post from '../Post/Post'
 
+import { Box } from '@material-ui/core'
+
 const Profile = (props) => {
     const [userData, setUserData] = useState(null)
-    //const [postFeed, setPostFeed] = useState([])
+    const [postFeed, setPostFeed] = useState([])
     const { id } = useParams()
     console.log(id)
     //const currentUser=getCurrentUser()
@@ -16,29 +18,21 @@ const Profile = (props) => {
         await userProfile(id)
         .then(response => {
             console.log(response)
-            setUserData(response.data)     
+            setUserData(response.data)
+            setPostFeed(response.data.posts)    
         })
         console.log(userData)
+        console.log(postFeed)
     }
 
     useEffect(() => {
         getUserProfile()
+        
     }, [])
 
-    // const feed = userData.posts.reverse().map((post, index) => {
-    //     return <Post key={post._id} post={post}/>
-    // })
-
-    const feed = () => {
-        if(userData.posts.length > 0){
-            userData.posts.reverse().map((post, index) => {
-                return <Post key={post._id} post={post}/>
-            })
-        }
-        else{
-            return <div>No posts for this user yet!</div>
-        }
-    }
+    const feed = userData.posts.reverse().map((post, index) => {
+        return <Post key={post._id} post={post}/>
+    })
 
     // <div>
     //         <h1>{userData.username}</h1>
@@ -54,8 +48,20 @@ const Profile = (props) => {
     //     </div>
 
     return(
+            <div>
+                <h1>{userData.username}</h1>
+                <h3>Total posts: {userData.posts.length}</h3>
+                <h3>Upvotes received: {userData.upvote}</h3>
+                {postFeed.length > 0 && (
+                    <div>
+                        {feed}
+                    </div>
+                )}
+            </div>
+            
+            
         
-        <h1>{userData.username}</h1>
+        
     )
 }
 
