@@ -130,7 +130,11 @@ const Post = props => {
             </Link>
             {(currentUser && postData.author[0]._id === currentUser.id) && (
                 <div>
-                    <Button variant="contained"color='primary' onClick={editPost}>Edit</Button>
+                    <Button variant="contained"color='primary' onClick={editPost}>
+                        <Link to={`/post/edit/${postData._id}`} state={{from: postData}} style={{ textDecoration: 'none', color: 'white'}}>
+                        Edit
+                        </Link>
+                    </Button>
                     <Button variant="contained" color="secondary" onClick={deleteThisPost}>Delete</Button>
                 </div>
             )}
