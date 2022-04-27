@@ -21,17 +21,19 @@ const Reply = (props) => {
     const [originalAuthor, setOriginalAuthor] = useState('')
     const [originalPostBody,setOriginalPostBody] = useState('')
     const [originalPostId,setOriginalPostId] = useState('')
-    const [test, setTest] = useState({})
+    const [repliesArray, setRepliesArray] = useState([])
 
     // need to use URL param to preserve reply information
     const getOriginalPost = () => {
         onePost(id)
         .then(response => {
             console.log(response.data[0])
-            setTitle(response.data[0].title)
+            //setTitle(response.data[0].title)
             setOriginalPostBody(response.data[0].body)
             setOriginalPostId(response.data[0]._id)
             setOriginalAuthor(response.data[0].author[0])
+            setRepliesArray(response.data.repliesArray)
+            console.log(repliesArray)
         })
     }
 
@@ -58,14 +60,14 @@ const Reply = (props) => {
             }
         })
         reply(
-            title,
+            
             post,
             tags,
             originalAuthor._id,
             originalPostId,
             author
         )
-        // navigate(`/post/${from.id}`)
+        
     }
 
     return(
