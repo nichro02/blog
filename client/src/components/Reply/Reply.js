@@ -11,6 +11,7 @@ const Reply = (props) => {
     const navigate = useNavigate()
     const { id } = useParams()
     console.log(id)
+    console.log(props)
     //const { from } = location.state
     //const originalPost = from._id
     //console.log(from)
